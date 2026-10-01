@@ -50,6 +50,7 @@ try{
   await page.getByRole('button',{name:'Ver relatório',exact:true}).click();assert.equal(await page.locator('#modal-content img').count(),0);assert.equal(await page.evaluate(()=>window.pwned),undefined);
   assert.ok((await page.locator('#modal-content').textContent()).includes('<img src=x'));
   const mdPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Exportar Markdown',exact:true}).click();const md=await mdPromise;assert.ok((await readFile(await md.path(),'utf8')).includes('&lt;img'));
+  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'Imprimir / salvar PDF',exact:true}).click();await page.emulateMedia({media:'print'});assert.equal(await page.locator('#print-report').evaluate(n=>getComputedStyle(n).display),'block');assert.equal(await page.locator('#main').evaluate(n=>getComputedStyle(n).display),'none');await page.pdf({path:`test-results/report-${viewport.width}.pdf`,format:'A4',printBackground:true});await page.emulateMedia({media:'screen'});
   await page.getByRole('button',{name:'Fechar janela',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:`test-results/conclusion-${viewport.width}.png`,fullPage:true});
@@ -58,10 +59,11 @@ try{
   await page.getByRole('button',{name:'Importar JSON',exact:true}).click();await page.getByLabel('Arquivo JSON',{exact:true}).setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"version":999}')});await page.getByRole('status').filter({hasText:'Estrutura inválida'}).waitFor();assert.equal(await page.locator('.investigation-row').count(),1);
   await page.getByLabel('Arquivo JSON',{exact:true}).setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(json))});await page.waitForFunction(()=>document.querySelectorAll('.investigation-row').length===2);assert.equal(await page.locator('.investigation-row').count(),2);
   await page.getByRole('button',{name:'Explorar exemplo',exact:true}).first().click();assert.ok(await page.getByLabel('O que você quer descobrir?',{exact:true}).isDisabled());await page.getByRole('button',{name:'Criar minha cópia',exact:true}).first().click();await page.getByLabel('O que você quer descobrir?',{exact:true}).fill('Minha cópia editável');assert.ok(await page.getByLabel('O que você quer descobrir?',{exact:true}).isEnabled());
-  await page.getByRole('button',{name:'Minhas investigações',exact:true}).click();assert.equal(await page.locator('.investigation-row').count(),3);
+  await page.getByRole('button',{name:'Minhas investigações',exact:true}).click();await page.waitForFunction(()=>document.querySelectorAll('.investigation-row').length===3);assert.equal(await page.locator('.investigation-row').count(),3);
   await page.locator('.investigation-row').first().getByRole('button',{name:'Excluir',exact:true}).click();await page.locator('#modal-content').getByRole('button',{name:'Excluir',exact:true}).click();await page.waitForFunction(()=>document.querySelectorAll('.investigation-row').length===2);assert.equal(await page.locator('.investigation-row').count(),2);
   await page.getByRole('button',{name:'Apagar todos os dados',exact:true}).click();await page.getByRole('button',{name:'Apagar tudo',exact:true}).click();await page.getByRole('heading',{name:'Que pergunta você quer investigar?',exact:true}).waitFor();assert.equal(await page.locator('.investigation-row').count(),0);
   await page.screenshot({path:`test-results/home-${viewport.width}.png`,fullPage:true});
+  await page.evaluate(()=>document.documentElement.style.fontSize='32px');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.evaluate(()=>document.documentElement.style.fontSize='');
   assert.deepEqual(errors,[]);
   }catch(error){await page.screenshot({path:`test-results/failure-${viewport.width}.png`,fullPage:true});console.log(await page.locator('body').innerText());throw error;}finally{await context.close();}
  });
