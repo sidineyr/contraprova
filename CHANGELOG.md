@@ -7,6 +7,7 @@
 - Sugestões corrigíveis para múltiplas frases, opinião, previsão e contexto.
 - Síntese, fontes originais, limitações e registro de indisponibilidade; trechos da mesma origem identificados.
 - IndexedDB v2 acrescenta armazenamento sem reescrever registros v0.1. Importação v1/v2 cria cópias, relatório legado completo preservado.
+- Correções de afirmações salvam revisão separada e preservam a decisão anterior; seleção de candidata recuperável.
 - Histórico e exportações como apoio; pesquisa de produto e comparação prática planejada, sem alegar superioridade.
 
 ## 0.1.0 — 2026-10-01
