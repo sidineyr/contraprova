@@ -6,7 +6,7 @@ Idealizado por Sidiney Rodrigues, pedagogo. A versão 0.2 ajuda a investigar uma
 
 ## Uso e cobertura
 
-Digite uma frase e clique em **Investigar**. Textos com mais de uma frase oferecem até três candidatas corrigíveis. Opiniões, previsões e falta de contexto recebem orientação; a classificação é uma sugestão, não diagnóstico. O resultado tem síntese por assunto, até três passagens, limitações e decisão humana: sustentar provisoriamente, revisar ou suspender. Justificativa opcional.
+Digite uma frase e clique em **Investigar**. Textos com mais de uma frase oferecem até três candidatas corrigíveis. Opiniões, previsões e falta de contexto recebem orientação; a classificação é uma sugestão, não diagnóstico. O resultado tem síntese por assunto, até três passagens, limitações e decisão humana: sustentar provisoriamente, revisar ou suspender. Justificativa opcional. Corrigir um resultado abre uma revisão separada, preservando a decisão anterior no histórico.
 
 **Não há busca ao vivo na internet.** O índice local cobre oito assuntos em sete páginas institucionais: HTTPS/Wi-Fi, modo anônimo, efeito estufa, gráficos, correlação/causalidade, Lua e riscos de IA generativa. Fontes em inglês, paráfrases editoriais em português. Conferência: 01/10/2026. A recuperação por termos aproxima assuntos, não interpreta logicamente todas as frases; pode retornar contexto insuficiente. Fora do acervo, informa ausência de evidências. Não há API, chave, backend ou dependência paga. Ver [SOURCES.md](SOURCES.md).
 

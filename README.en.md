@@ -8,7 +8,7 @@ Conceived by educator Sidiney Rodrigues. Version 0.2 helps investigate a factual
 
 This is **not live web search**. A zero-budget local index covers eight topics from seven institutional pages: HTTPS/Wi-Fi, Chrome Incognito, greenhouse effect, charts, correlation/causation, the Moon and generative AI risks. English sources have original Portuguese editorial paraphrases, checked October 1, 2026. Term matching retrieves topic context, not a logical verdict on arbitrary claims. Unsupported topics produce an explicit lack-of-evidence response. No API, key, paid service or backend.
 
-Multiple sentences offer up to three editable candidates. Fact/opinion/prediction/context categories are suggestions. Results expose provenance, limitations and same-origin passages; people may sustain provisionally, revise or suspend judgment, with an optional reason. Starter examples fill the input, then run the same search; they are not simulated live results.
+Multiple sentences offer up to three editable candidates. Fact/opinion/prediction/context categories are suggestions. Results expose provenance, limitations and same-origin passages; people may sustain provisionally, revise or suspend judgment, with an optional reason. Correcting a result creates a separate revision and preserves the previous decision in history. Starter examples fill the input, then run the same search; they are not simulated live results.
 
 ## Run and test
 
