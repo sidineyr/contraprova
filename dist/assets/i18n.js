@@ -1,3 +1,4 @@
-// UI text is isolated for future authored translations. Only pt-BR is implemented.
+// Interface in Brazilian Portuguese only; no unimplemented languages advertised.
 export const locale='pt-BR';
-export const strings={steps:['Minha pergunta','Resposta da IA','Afirmações','Evidências','Confronto','Minha conclusão'],prompts:['O que você quer descobrir? Registre sua ideia antes de investigar.','Cole a resposta. Uma explicação convincente também pode conter erros.','Qual parte merece ser examinada? Separe uma afirmação por cartão.','De onde vem a informação? Procure evidências que possam contrariar sua ideia.','A fonte realmente responde à afirmação? Explique a relação.','O que você entende agora? Compare, revise e deixe suas dúvidas registradas.']};
+export const examples=['Todo site com HTTPS é confiável.','Todo gráfico precisa começar em zero.','As fases da Lua são causadas pela sombra da Terra.'];
+export const kindLabels={fact:'Afirmação factual',opinion:'Opinião ou juízo de valor',prediction:'Previsão',context:'Precisa de contexto'};

@@ -2,85 +2,51 @@
 
 **A resposta parece boa. Como você sabe?**
 
-Aplicativo educacional livre idealizado por **Sidiney Rodrigues** para investigar respostas de IA, confrontar afirmações com fontes e registrar mudanças de entendimento.
+Idealizado por Sidiney Rodrigues, pedagogo. A versão 0.2 ajuda a investigar uma afirmação factual antes de aceitar ou compartilhar: trazer uma frase, ler fundamentos, abrir uma fonte e decidir como proceder. Não exige cadastro nem percurso de formulários.
 
-[English documentation](README.en.md)
+## Uso e cobertura
 
-## Versão 0.1.0
+Digite uma frase e clique em **Investigar**. Textos com mais de uma frase oferecem até três candidatas corrigíveis. Opiniões, previsões e falta de contexto recebem orientação; a classificação é uma sugestão, não diagnóstico. O resultado tem síntese por assunto, até três passagens, limitações e decisão humana: sustentar provisoriamente, revisar ou suspender. Justificativa opcional.
 
-O aplicativo oferece seis etapas: pergunta e explicação inicial; resposta da IA com origem opcional; cartões de afirmações; evidências; confronto justificado; conclusão revisada com dúvidas e comparação antes/depois.
+**Não há busca ao vivo na internet.** O índice local cobre oito assuntos em sete páginas institucionais: HTTPS/Wi-Fi, modo anônimo, efeito estufa, gráficos, correlação/causalidade, Lua e riscos de IA generativa. Fontes em inglês, paráfrases editoriais em português. Conferência: 01/10/2026. A recuperação por termos aproxima assuntos, não interpreta logicamente todas as frases; pode retornar contexto insuficiente. Fora do acervo, informa ausência de evidências. Não há API, chave, backend ou dependência paga. Ver [SOURCES.md](SOURCES.md).
 
-- Criar, renomear, continuar e excluir investigações.
-- Rascunhos salvos automaticamente no IndexedDB, por navegador e origem.
-- Criar cartões manualmente ou selecionar trechos da resposta.
-- Exportar uma investigação ou todos os registros em JSON versionado; importar como cópias, sem substituir registros existentes.
-- Relatório Markdown e impressão pelo navegador, inclusive para rascunhos.
-- Três demonstrações separadas de registros pessoais, com respostas simuladas e fontes conferidas.
-- Exclusão de todos os dados e opção de ocultar a coruja original.
-- Interface em **português brasileiro**. README em português e inglês. Traduções futuras podem ampliar o módulo `i18n.js` e externalizar os demais textos; não há interface inglesa nesta versão.
-
-O aplicativo **organiza registros**. Não verifica automaticamente a verdade, não detecta autoria de IA, não mede capacidade intelectual e não produz notas de pensamento crítico. Marcar um percurso como registrado verifica preenchimento, não qualidade ou aprendizagem. Sua eficácia pedagógica ainda não foi avaliada.
+Os exemplos da entrada são **frases de partida**, não respostas simuladas. A busca usa o mesmo índice para exemplos e entradas livres. Os exemplos completos antigos permanecem em `examples.js`, identificados como demonstrações, fora dos registros pessoais e fora do novo percurso.
 
 ## Executar
 
-Requer um navegador moderno com JavaScript e IndexedDB habilitados. Sirva a pasta `dist` por HTTP; não abra o HTML diretamente via `file://` porque ele usa módulos JavaScript.
-
 ```sh
-python -m http.server 8000 --directory dist
+python3 -m http.server 8000 --directory dist
 ```
 
-Abra `http://localhost:8000`. Não há instalação, backend, chave ou dependência de produção. Para hospedagem estática, publique o conteúdo de `dist`. O código não oferece instalação offline, sincronização ou contas.
-
-Os registros pertencem à origem: protocolo, domínio e porta. Mudar de endereço não transfere seus dados; exporte JSON e importe no novo endereço.
-
-## Arquitetura
-
-| Arquivo | Responsabilidade |
-| --- | --- |
-| `dist/index.html` | Estrutura semântica e metadados |
-| `dist/assets/app.js` | Interface e percurso |
-| `dist/assets/core.js` | Modelo, validação, importação e relatório Markdown |
-| `dist/assets/storage.js` | IndexedDB e transações |
-| `dist/assets/examples.js` | Demonstrações editoriais e fontes |
-| `dist/assets/i18n.js` | Idioma e textos iniciais para tradução futura |
-| `dist/assets/styles.css` | Layout responsivo, foco, contraste e impressão |
-| `dist/assets/owl.webp` | Coruja original criada com apoio de IA |
-
-## Formato e limites
-
-JSON `format: "contraprova"`, `version: 1`, com `exportedAt` e `investigations`. Importações são validadas integralmente antes da transação e ganham novos identificadores. Dados existentes não são sobrescritos.
-
-Limites: 2 MB por arquivo JSON, 100 investigações locais, 100 afirmações por investigação, 50 evidências por afirmação, 100 mil caracteres por texto longo. A exportação JSON respeita o mesmo limite de tamanho para permitir reimportação. Fontes impressas podem ficar sem URL. Relação e justificativa são necessárias para registrar uma conclusão completa.
-
-## Privacidade e segurança
-
-Leia [PRIVACY.md](PRIVACY.md) e [SECURITY.md](SECURITY.md). O código não envia registros para servidores nem busca URLs automaticamente. O provedor de hospedagem recebe as requisições de carregamento e pode manter logs técnicos. Fontes externas abertas pelo usuário têm políticas próprias.
-
-Não há criptografia dos registros locais. Quem acessa o mesmo perfil do navegador pode lê-los. Limpeza do navegador, modo privado, quotas e políticas de descarte podem causar perda: exporte regularmente.
-
-Textos são renderizados com `textContent`/`value`. URLs clicáveis aceitam somente HTTP/HTTPS sem credenciais. Importações rejeitam esquema desconhecido, campos inesperados, limites excedidos e estruturas inválidas. Relatórios Markdown escapam HTML e sintaxe de entrada. Esta proteção não garante o comportamento de todo visualizador externo.
-
-## Verificação e contribuição
-
-Node.js 20 ou posterior para verificações locais:
+Abrir http://localhost:8000. Servir `dist/` em hospedagem estática HTTPS; não abrir `index.html` diretamente pelo sistema de arquivos. Não há compilação nem instalação para usar. JavaScript e IndexedDB necessários. A interface implementada é **pt-BR**; README em inglês é documentação, não tradução do aplicativo.
 
 ```sh
-npm test
 npm run check
-```
-
-Testes de navegador opcionais usam Playwright, apenas em desenvolvimento:
-
-```sh
-npm install
-npx playwright install chromium
+npm test
+npm install --ignore-scripts
+npx playwright install --with-deps chromium
 npm run test:browser
 ```
 
-Veja [VALIDATION.md](VALIDATION.md), [CONTRIBUTING.md](CONTRIBUTING.md), [SOURCES.md](SOURCES.md) e [PILOT.md](PILOT.md). Os testes não constituem avaliação de eficácia pedagógica nem auditoria integral de acessibilidade.
+Playwright é dependência apenas de desenvolvimento. CI testa Chromium em computador e celular simulado; não substitui aparelhos reais ou avaliação humana.
 
-## Autoria e licenças
+## Dados e arquitetura
 
-Idealização e direção: Sidiney Rodrigues. Desenvolvimento, redação e ilustração com apoio de inteligência artificial, sob responsabilidade humana. Não há endosso das instituições citadas.
+- `app.js`: interface e percurso; renderização por `textContent`, sem HTML de entradas.
+- `search.js` / `corpus.js`: recuperação determinística local e conteúdo editorial versionado. Links não são buscados automaticamente.
+- `checks.js`: modelo novo, importação JSON v2 estrita, relatórios e compatibilidade v1.
+- `core.js`: modelo e exportação v1 preservados.
+- `storage.js`: IndexedDB `contraprova`, versão 2; acrescenta `checks` sem alterar `investigations` e `preferences` antigos. Registros v0.1 permanecem integrais, consultáveis e exportáveis como relatório/JSON; não viram novos resultados automáticos.
+- `i18n.js`: exemplos e rótulos separados, ponto inicial de futura tradução; demais textos ainda precisam ser extraídos antes de traduzir.
 
-Código: [MIT](LICENSE). Conteúdo educacional original: [CC BY 4.0](LICENSE-CONTENT.md). Fontes externas mantêm seus direitos; os exemplos usam paráfrases identificadas, sem reproduzir seus textos integrais.
+Rascunhos salvam após 250 ms de pausa; navegação interna aguarda gravação. Fechar imediatamente durante gravação ou falha de armazenamento pode perder a última alteração. Exportar um backup é recomendado. Manter mesma origem/URL para preservar dados do navegador: mudar domínio não transfere IndexedDB.
+
+Importação de até 2 MB e 100 registros por arquivo, JSON v1/v2, cria cópias sem substituir registros. Estruturas, tamanhos, enums e URLs HTTP(S) sem credenciais são validados. Backups grandes devem ser divididos por exportação individual. Importado não significa autenticado; fontes e resumos importados ficam identificados. Markdown escapa texto não confiável. Relatório legível por impressão; PDF usa recurso do navegador.
+
+## Limites e avaliação
+
+O aplicativo não decide verdade, não detecta IA, não pontua raciocínio e não transforma fontes em votos. Sínteses editoriais não são citações literais nem extração ao vivo. Trechos da mesma origem são identificados. A indisponibilidade de um link pode ser registrada pela pessoa, sem fingir verificação automática.
+
+A eficácia pedagógica e a vantagem sobre chatbot **ainda não foram avaliadas**. [PRODUCT.md](PRODUCT.md) documenta o problema e a pesquisa filosófica. [PILOT.md](PILOT.md) prepara uma comparação contrabalançada. [VALIDATION.md](VALIDATION.md) distingue verificações técnicas e humanas.
+
+Ver [PRIVACY.md](PRIVACY.md), [SECURITY.md](SECURITY.md), [CONTRIBUTING.md](CONTRIBUTING.md) e [CHANGELOG.md](CHANGELOG.md). Código MIT; conteúdo educacional original CC BY 4.0. Referências de terceiros mantêm seus direitos e não estão relicenciadas.

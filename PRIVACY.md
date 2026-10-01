@@ -1,23 +1,17 @@
-# Privacidade / Privacy
-
-Versão 0.1.0 · 01/10/2026
+# Privacidade / Privacy — 0.2
 
 ## Português
 
-O aplicativo armazena investigações e a preferência de ocultar a coruja no IndexedDB do navegador. Registros incluem título, pergunta, explicação inicial, confiança declarada, resposta investigada, origem opcional, afirmações, fontes, avaliações justificadas, conclusão e datas. Nenhum desses registros é enviado pelo código do aplicativo.
+A recuperação é local, em arquivos do acervo. Sua frase, justificativa e decisão não são enviadas a buscador, chatbot ou servidor do aplicativo. Sem backend, chaves, anúncios, rastreadores ou fontes remotas. O provedor de hospedagem pode receber dados técnicos usuais de acesso (por exemplo IP e pedido de arquivo); não recebe consultas pelo código desta aplicação. Não prometemos controle sobre retenção dos logs da hospedagem.
 
-Não há contas, sessões de usuário próprias, tokens, analytics, anúncios, rastreadores, chamadas a IA, fontes tipográficas remotas ou busca automática de URLs. A hospedagem recebe requisições para servir arquivos e pode manter logs técnicos próprios; não afirmamos ausência de logs do provedor. Uma hospedagem privada pode exigir autenticação do provedor, distinta do aplicativo.
+Ao abrir a fonte, seu navegador visita o site externo. Esse site tem sua própria política, pode registrar o acesso e pode estar indisponível. Não há busca automática do conteúdo de URLs.
 
-Os dados locais não têm prazo automático de expiração, criptografia ou sincronização. O navegador pode removê-los por limpeza, modo privado, quota ou política de descarte. Quem usa o mesmo perfil tem acesso. Exporte JSON para guardar uma cópia fora do navegador. A função Apagar todos os dados limpa os dois object stores locais, sem apagar arquivos exportados ou logs do provedor.
+IndexedDB no dispositivo armazena rascunhos, evidências recuperadas e decisões. Não há conta, sincronização ou cópia no servidor. Dados locais podem desaparecer ao limpar navegador, mudar domínio/dispositivo ou usar modo privado. Exportação JSON é o backup; contém seus textos e deve ser guardada com cuidado. Importação cria cópias, preservando registros anteriores. Exclusão por registro e “Apagar todos os dados” removem dados desta aplicação neste navegador; não apagam arquivos já exportados ou logs dos sites visitados.
 
-Importações são locais e acrescentam cópias. Exportações são arquivos gerados no dispositivo. Relatórios impressos ou PDFs ficam sujeitos ao destino escolhido pelo usuário. Fontes externas só são acessadas por clique, em nova aba, com `noopener noreferrer`; têm políticas próprias.
-
-Não inclua senhas, documentos pessoais ou dados de terceiros. Este produto não solicita dados de estudantes nem faz avaliação psicométrica. O preenchimento e a mudança de confiança não demonstram aprendizagem. A eficácia pedagógica permanece não avaliada.
+Uma futura busca externa exigirá aviso antes do envio, revisão desta política, provedor/retencão documentados e autorização para custos. Essa arquitetura não está implementada.
 
 ## English
 
-Investigations and the owl visibility preference are stored in this browser's IndexedDB. The application code does not transmit these records. It includes no accounts, application sessions, tokens, analytics, ads, tracking, AI calls, remote fonts or automatic source fetching.
+Search is local within bundled corpus files. Claims and decisions are not sent to search/AI/application servers. No backend, keys, ads, trackers or remote fonts. Hosting may retain technical request logs under its own policy, outside this application's control; query text is not transmitted by the code.
 
-The host receives file requests and may keep technical logs. Private hosting may require separate provider authentication. Local records are not encrypted, synchronized or automatically expired. Browser policies may delete them, and other users of the same profile can access them. Export JSON backups. Clearing all data removes both local object stores, but not exported files or provider logs.
-
-Imports add local copies; exports generate local files. Printing/PDF handling depends on the chosen destination. External links open only after a user click with `noopener noreferrer`, under the external site's policies. Avoid sensitive information. Educational effectiveness has not been evaluated.
+Opening sources visits external sites under their policies. No URLs are fetched automatically. IndexedDB stores drafts on the device; no accounts, sync or server backup. JSON exports are personal backups. Deleting local records does not delete previously exported files or third-party access logs. External search would require a new privacy notice and architecture review; it is not implemented.
