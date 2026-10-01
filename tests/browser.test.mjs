@@ -1,7 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {readFile,mkdir} from 'node:fs/promises';
+import {readFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
 import {resolve,extname} from 'node:path';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
@@ -17,6 +18,7 @@ try{
  browser=await chromium.launch({headless:true});
  for(const viewport of [{width:1360,height:900},{width:390,height:844}])await test(`complete workflow, persistence, import safety and deletion at ${viewport.width}px`,async()=>{
   const context=await browser.newContext({viewport,acceptDownloads:true});let page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  try{
   await page.goto(url);await page.getByRole('button',{name:'Nova investigação',exact:true}).click();
   await page.getByLabel('O que você quer descobrir?',{exact:true}).fill('HTTPS garante honestidade?');
   await page.getByLabel('Minha explicação antes de investigar',{exact:true}).fill('Eu achava que o cadeado garantia confiança.');
@@ -60,6 +62,11 @@ try{
   await page.locator('.investigation-row').first().getByRole('button',{name:'Excluir',exact:true}).click();await page.locator('#modal-content').getByRole('button',{name:'Excluir',exact:true}).click();await page.waitForFunction(()=>document.querySelectorAll('.investigation-row').length===2);assert.equal(await page.locator('.investigation-row').count(),2);
   await page.getByRole('button',{name:'Apagar todos os dados',exact:true}).click();await page.getByRole('button',{name:'Apagar tudo',exact:true}).click();await page.getByRole('heading',{name:'Que pergunta você quer investigar?',exact:true}).waitFor();assert.equal(await page.locator('.investigation-row').count(),0);
   await page.screenshot({path:`test-results/home-${viewport.width}.png`,fullPage:true});
-  assert.deepEqual(errors,[]);await context.close();
+  assert.deepEqual(errors,[]);
+  }catch(error){await page.screenshot({path:`test-results/failure-${viewport.width}.png`,fullPage:true});console.log(await page.locator('body').innerText());throw error;}finally{await context.close();}
  });
+await test('draft survives full browser process close and restart',async()=>{
+ const profile=await mkdtemp(resolve(tmpdir(),'contraprova-profile-'));let persistent;
+ try{persistent=await chromium.launchPersistentContext(profile,{headless:true});let page=await persistent.newPage();await page.goto(url);await page.getByRole('button',{name:'Nova investigação',exact:true}).click();await page.getByLabel('O que você quer descobrir?',{exact:true}).fill('Rascunho após reiniciar navegador');await page.waitForFunction(()=>document.querySelector('#save-state')?.textContent==='Salvo neste dispositivo');await persistent.close();persistent=await chromium.launchPersistentContext(profile,{headless:true});page=await persistent.newPage();await page.goto(url);await page.getByRole('button',{name:'Continuar',exact:true}).click();assert.equal(await page.getByLabel('O que você quer descobrir?',{exact:true}).inputValue(),'Rascunho após reiniciar navegador');}finally{await persistent?.close();await rm(profile,{recursive:true,force:true});}
+});
 }finally{await browser?.close();await new Promise(r=>server.close(r));}
