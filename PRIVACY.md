@@ -1,17 +1,9 @@
-# Privacidade / Privacy — 0.2
+# Privacidade — atualização 0.3
 
-## Português
+Há dois modos. No acervo local, a frase não é enviada a um buscador. Na pesquisa online, a afirmação selecionada é enviada ao servidor e à OpenAI para busca e análise; o histórico não é enviado. A interface informa isso antes da ação. Evite dados pessoais e sensíveis.
 
-A recuperação é local, em arquivos do acervo. Sua frase, justificativa e decisão não são enviadas a buscador, chatbot ou servidor do aplicativo. Sem backend, chaves, anúncios, rastreadores ou fontes remotas. O provedor de hospedagem pode receber dados técnicos usuais de acesso (por exemplo IP e pedido de arquivo); não recebe consultas pelo código desta aplicação. Não prometemos controle sobre retenção dos logs da hospedagem.
+O servidor usa `store:false` e não grava frases, investigações ou respostas em disco nem imprime esses conteúdos em logs. Isso não elimina registros técnicos da hospedagem, do proxy ou do provedor; as políticas e configurações deles se aplicam. A chave existe apenas no ambiente do servidor, nunca no navegador.
 
-Ao abrir a fonte, seu navegador visita o site externo. Esse site tem sua própria política, pode registrar o acesso e pode estar indisponível. Não há busca automática do conteúdo de URLs.
+O histórico continua no IndexedDB deste navegador, sem conta ou sincronização. Ao abrir uma fonte, você visita outro site. Mudar de domínio ou limpar dados do navegador pode perder registros: exporte JSON para transferi-los. Importações criam cópias, preservando o que já existe. Exclusão individual e total continuam disponíveis em Minhas investigações.
 
-IndexedDB no dispositivo armazena rascunhos, evidências recuperadas e decisões. Não há conta, sincronização ou cópia no servidor. Dados locais podem desaparecer ao limpar navegador, mudar domínio/dispositivo ou usar modo privado. Exportação JSON é o backup; contém seus textos e deve ser guardada com cuidado. Importação cria cópias, preservando registros anteriores. Exclusão por registro e “Apagar todos os dados” removem dados desta aplicação neste navegador; não apagam arquivos já exportados ou logs dos sites visitados.
-
-Uma futura busca externa exigirá aviso antes do envio, revisão desta política, provedor/retencão documentados e autorização para custos. Essa arquitetura não está implementada.
-
-## English
-
-Search is local within bundled corpus files. Claims and decisions are not sent to search/AI/application servers. No backend, keys, ads, trackers or remote fonts. Hosting may retain technical request logs under its own policy, outside this application's control; query text is not transmitted by the code.
-
-Opening sources visits external sites under their policies. No URLs are fetched automatically. IndexedDB stores drafts on the device; no accounts, sync or server backup. JSON exports are personal backups. Deleting local records does not delete previously exported files or third-party access logs. External search would require a new privacy notice and architecture review; it is not implemented.
+O servidor mantém contadores temporários por endereço de conexão por até um minuto para limitar abuso. Não usa cabeçalhos de proxy como identidade. Limites globais reiniciam ao reiniciar o processo. Investigações não são publicadas automaticamente.
