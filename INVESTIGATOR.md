@@ -4,7 +4,7 @@
 
 Investigar uma afirmação recebida antes de acreditar ou compartilhar. A experiência remete a um investigador: examinar origem, contexto, evidências e contradições, sem procurar apenas confirmação.
 
-Esta é a especificação do próximo percurso. A versão atual continua usando o acervo local de oito assuntos. Não há busca ao vivo nem API de IA implementada. A mudança de entrada não ativa esses serviços.
+A versão 0.3 implementa o endpoint de pesquisa online e a interface com citações rastreáveis, mantendo o acervo local de oito assuntos. A pesquisa online exige configuração do provedor no servidor; sem ela, o recurso não fica ativo. A implementação não foi validada com uma chave real.
 
 ## Entrada e resultado
 
@@ -39,7 +39,7 @@ Um endpoint no servidor recebe uma afirmação, procura checagens e fontes prim�
 
 A IA auxilia interpretação, consultas e síntese. O mecanismo de pesquisa fornece resultados rastreáveis. Uma resposta de IA sem recuperação de fontes não satisfaz o requisito.
 
-Selecionar o provedor, confirmar disponibilidade/custo e configurar a credencial antes de ativar o recurso. Nunca colocar chaves no navegador. Definir limites de tamanho, tempo, requisições e orçamento; falhas devem ser explícitas, sem substituição silenciosa por busca local.
+O adaptador inicial usa OpenAI Responses API com web_search obrigatório. Confirmar disponibilidade/custo do modelo e configurar a credencial antes de ativar o recurso. Nunca colocar chaves no navegador. Definir limites de tamanho, tempo, requisições e orçamento; falhas devem ser explícitas, sem substituição silenciosa por busca local.
 
 ## Preservação e privacidade
 
@@ -66,4 +66,4 @@ Julgamento humano: confirmar a interpretação, avaliar se a evidência se aplic
 - Registros v1/v2 sobrevivem à migração e continuam exportáveis.
 - Piloto com pessoas externas observa início sem ajuda, consulta ao original e decisão explicável.
 
-Este documento define o próximo produto; não constitui validação de eficácia nem entrega da integração.
+Este documento define os critérios da versão 0.3 e seus próximos testes. A integração está implementada, mas sua ativação, validação real e publicação do servidor dependem da configuração; não constitui validação de eficácia.
