@@ -13,7 +13,7 @@ export function makeServer({key=process.env.OPENAI_API_KEY,model=process.env.RES
   const send=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(value));};
   return createServer(async(req,res)=>{
     res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');
-    res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'");
+    res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self' data: https://hits.sh; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'");
     try {
       const url=new URL(req.url,'http://localhost');
       if(url.pathname==='/api/config' && req.method==='GET') return send(res,200,{online:Boolean(key && model),provider:'OpenAI'});

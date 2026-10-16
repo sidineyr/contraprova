@@ -66,3 +66,8 @@ O modo local não decide verdade, não detecta IA, não pontua raciocínio e nã
 A eficácia pedagógica e a vantagem sobre chatbot **ainda não foram avaliadas**. [PRODUCT.md](PRODUCT.md) documenta o problema e a pesquisa filosófica. [PILOT.md](PILOT.md) prepara uma comparação contrabalançada. [VALIDATION.md](VALIDATION.md) distingue verificações técnicas e humanas.
 
 Ver [PRIVACY.md](PRIVACY.md), [SECURITY.md](SECURITY.md), [CONTRIBUTING.md](CONTRIBUTING.md) e [CHANGELOG.md](CHANGELOG.md). Código MIT; conteúdo educacional original CC BY 4.0. Referências de terceiros mantêm seus direitos e não estão relicenciadas.
+
+
+## Contador de acessos (16/10/2026)
+
+A página inicial exibe um contador público Hits, chave `contraprova.blubier.chatgpt.site`. Conta carregamentos do indicador desde a instalação, não pessoas únicas. O serviço externo recebe dados técnicos da conexão; nenhuma resposta de atividade é enviada. O portfólio consulta o total pela API de estatísticas, sem carregar o SVG e sem acrescentar acessos. Histórico anterior à instalação não foi estimado.

@@ -7,3 +7,7 @@ O servidor usa `store:false` e não grava frases, investigações ou respostas e
 O histórico continua no IndexedDB deste navegador, sem conta ou sincronização. Ao abrir uma fonte, você visita outro site. Mudar de domínio ou limpar dados do navegador pode perder registros: exporte JSON para transferi-los. Importações criam cópias, preservando o que já existe. Exclusão individual e total continuam disponíveis em Minhas investigações.
 
 O servidor mantém contadores temporários por endereço de conexão por até um minuto para limitar abuso. Não usa cabeçalhos de proxy como identidade. Limites globais reiniciam ao reiniciar o processo. Investigações não são publicadas automaticamente.
+
+
+## Contador público de acessos
+Desde 16/10/2026, o indicador da página inicial usa Hits. O serviço recebe IP e dados técnicos da requisição da imagem, sem frases investigadas ou registros pessoais. Mede carregamentos, não pessoas únicas. O portfólio lê somente as estatísticas.
